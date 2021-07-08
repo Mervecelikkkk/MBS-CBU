@@ -1,0 +1,97 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profil";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<h5>@ViewData["Title"]</h5>
+<hr />
+<partial name="_StatusMessage" model="Model.StatusMessage"/>
+<div class="row">
+    <div class="col-lg-12">
+        <form id="profile-form" method="post">
+            <div asp-validation-summary="All" class="text-danger col-lg-12"></div>
+            <div class="col-lg-12">
+                <div class="form-group col-lg-6 col-lg-6">
+
+                    <label asp-for="Input.FirsName"></label>
+                    <input asp-for="Input.FirsName" class="form-control" />
+                    <span asp-validation-for="Input.FirsName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-lg-6 col-lg-6">
+                    <label asp-for="Input.LastName"></label>
+                    <input asp-for="Input.LastName" class="form-control" />
+                    <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                </div>
+                
+
+            </div>
+
+            <div class="col-lg-12">
+                <div class="form-group col-lg-6 col-lg-6">
+                    <label asp-for="Input.Job"></label>
+                    <input asp-for="Input.Job" class="form-control" />
+                </div>
+                <div class="form-group col-lg-6 col-lg-6">
+                    <label asp-for="Input.PhoneNumber"></label>
+                    <input asp-for="Input.PhoneNumber" class="form-control" />
+                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                </div>
+
+
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group col-lg-6 col-lg-6">
+                    <label asp-for="Input.Gender"></label>
+                    <select asp-for="Input.Gender" class="form-control">
+                        <option selected disabled>Cinsiyet seçiniz</option>
+                        <option value="Kadın">Kadın</option>
+                        <option value="Erkek">Erkek</option>
+                    </select>
+                </div>
+                <div class="form-group col-lg-6 col-lg-6">
+                    <label asp-for="Input.Department"></label>
+                    <input asp-for="Input.Department" class="form-control" />
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group col-lg-6 col-lg-6">
+                    <label asp-for="Input.Business"></label>
+                    <input asp-for="Input.Business" class="form-control" />
+                </div>
+                <div class="form-group col-lg-6 col-lg-6">
+                    <label asp-for="Input.SuccesStory"></label>
+                    <textarea asp-for="Input.SuccesStory" class="form-control"></textarea>
+                </div>
+            </div>
+            @*<div class="form-group row">
+            <label asp-for="Input.ProfilePicture" class="control-label"></label>
+            <div class="custom-file">
+                <input asp-for="Input.ProfilePicture" class="custom-file-input" id="customFile">
+                <label class="custom-file-label" for="customFile">Dosya Seçiniz</label>
+            </div>
+        </div>*@
+
+            <div class="col-lg-12">
+            <div class="col-lg-12 col-lg-12">
+
+                <button id="update-profile-button" type="submit" class="btn btn-primary float-right">Kaydet</button>
+            </div>
+           
+        </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+@*<script type="text/javascript">
+
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>*@

@@ -1,0 +1,147 @@
+﻿@model PaginatedList<MezunBilgiSistemi.Areas.Identity.Data.MBSUser>
+
+@{
+    ViewData["Title"] = "Kullanıcılar";
+    Layout = "~/Views/Admin/_LayoutAdmin.cshtml";
+}
+
+
+
+<div class="content-col w-100 pb-5">
+
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-12 col-lg-10">
+
+                <div class="page-baslik">
+                    <h2 class="mb-3 mt-3">Kullanıcılar</h2>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+        <form asp-action="Kullanıcılar" method="get">
+            <div class="form-actions no-color">
+                <p>
+                    Arama Yapın : <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                    <input type="submit" value="Search" class="btn btn-default" /> |
+                    <a asp-action="Kullanıcılar">Full Liste</a>
+                </p>
+            </div>
+        </form>
+
+
+
+        <div class="row">
+            <div class="col-lg-12 ">
+                <a href="NewUser" class="btn btn-primary mb-3" style="padding: 2px 2px 2px 2px; width: auto">
+                    <i class="fas fa-plus-square " style="  padding:0px; height: 0.5rem;
+
+"> </i> Yeni Kullanıcı
+                </a>
+                <div class="card p-2">
+
+                    <div class="row card-title-row mb-2 sm-hide">
+
+
+                        <div class="col-6 col-lg-1   mt-1 mb-1"><a asp-action="Kullanıcılar" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">İsim</a></div>
+                        <div class="col-6 col-lg-1   mt-1 mb-1"><a asp-action="Kullanıcılar" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Soy İsim</a></div>
+                        <div class="col-6 col-lg-1   mt-1 mb-1">Adres</div>
+                        <div class="col-6 col-lg-2   mt-1 mb-1">Tc No</div>
+                        <div class="col-6 col-lg-1   mt-1 mb-1"><a asp-action="Kullanıcılar" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Doğum Tarihi</a></div>
+                        <div class="col-6 col-lg-1   mt-1 mb-1">Telefon</div>
+                        <div class="col-6 col-lg-1   mt-1 mb-1">Meslek</div>
+                        <div class="col-6 col-lg-1   mt-1 mb-1">İş Yeri</div> 
+
+                        <div class="col-6 col-lg-1   mt-1 mb-1">Email Onayı</div>
+                        <div class="col-6 col-lg-1   mt-1 mb-1">Anasayfa Durum</div>
+                        <div class="col-6 col-lg-1   mt-1 mb-1"></div>
+
+                        <div class="col-lg-12">
+                            <hr class="mt-1 mb-0" />
+
+                        </div>
+                    </div>
+
+                    @if (Model.Any())
+                    {
+                        @foreach (var user in Model)
+                        {
+                <div class="row">
+
+
+                    <div class="col-6 col-lg-1   mt-1 mb-1">@user.FirsName</div>
+                    <div class="col-6 col-lg-1   mt-1 mb-1">@user.LastName</div>
+                    <div class="col-6 col-lg-1   mt-1 mb-1">@user.Address</div>
+                    <div class="col-6 col-lg-2   mt-1 mb-1">@user.IdentificationNumber</div>
+                    <div class="col-6 col-lg-1   mt-1 mb-1">@user.DateOfBirth.ToString($"{0:dd/MM/yyyy}")</div>
+                    <div class="col-6 col-lg-1   mt-1 mb-1">@user.PhoneNumber</div>
+                    <div class="col-6 col-lg-1   mt-1 mb-1">@user.Job</div>
+                    <div class="col-6 col-lg-1   mt-1 mb-1">@user.Business</div>
+                    <div class="col-6 col-lg-1   mt-1 mb-1">@user.EmailConfirmed</div>
+                    <div class="col-6 col-lg-1   mt-1 mb-1">@user.IsHome</div>
+                    <div class="col-6 col-lg-1   mt-1 mb-1" style="">
+                        <a class="mr-2" asp-action="EditUser" asp-route-id="@user.Id"><i class="fas fa-edit" style="color:cornflowerblue;"></i></a>
+                        <a asp-action="DeleteUser" asp-route-id="@user.Id">
+                            <i class="fas fa-trash-alt" style="color:#d10404; "></i>
+                        </a>
+                    </div>
+
+                    <div class="col-12 ">
+                        <hr class="mt-1 mb-0" />
+                    </div>
+
+
+                </div>
+                        }
+
+                    }
+                    else
+                    {
+                        <div class="">
+                            <div class="text-center" colspan="4">
+                                <h5>Henüz hiç kayıt yok.</h5>
+                                <form asp-action="Kullanıcılar" method="get">
+                                    <div class="form-actions no-color">
+                                        <p>
+                                            Arama Yapın : <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                                            <input type="submit" value="Search" class="btn btn-default" /> |
+                                            <a asp-action="Kullanıcılar">Full Liste</a>
+                                        </p>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Kullanıcılar"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Kullanıcılar"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>
+
+

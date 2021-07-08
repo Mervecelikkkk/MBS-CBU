@@ -1,0 +1,168 @@
+﻿@model PaginatedList<MezunBilgiSistemi.Models.Etkinlikler>
+
+@{
+    ViewData["Title"] = "Etkinlikler";
+    Layout = "~/Views/Admin/_LayoutAdmin.cshtml";
+}
+
+<div class="content-col w-100 pb-5">
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-12 col-lg-10">
+
+
+                <div class="page-baslik">
+                    <h2 class="mb-3 mt-3">Etkinlikler</h2>
+
+
+                </div>
+            </div>
+            <form asp-action="Etkinlikler" method="get">
+                <div class="form-actions no-color">
+                    <p>
+                        Arama Yapın : <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                        <input type="submit" value="Search" class="btn btn-default" /> |
+                        <a asp-action="Etkinlikler">Full Liste</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+
+        <div class="row">
+
+
+            @if (Model.Any())
+
+            {
+
+
+                <div class="col-lg-12 ">
+                    <a href="EtkinlikEkle" class="btn btn-primary mb-3" style="padding: 2px 2px 2px 2px; width: auto">
+                        <i class="fas fa-plus-square " style="  padding:0px; height: 0.5rem;
+
+"> </i> Yeni Etkinlik
+                    </a>
+                    <div class="card p-2">
+
+                        <div class="row card-title-row mb-2 sm-hide">
+
+                            <div class="col-6 col-lg-3">Etkinlik Başlığı</div>
+                            <div class="col-6 col-lg-3 ">Etkinlik Açıklama</div>
+                            <div class="col-6 col-lg-2 ">Anasayfa Durumu</div>
+                            <div class="col-6 col-lg-2 "><a asp-action="Etkinlikler" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Yüklenme Tarihi</a></div>
+                            <div class="col-6 col-lg-2">Fotoğraf</div>
+                            <div class="col-6 col-lg-2"></div>
+
+
+
+                            <div class="col-lg-12">
+                                <hr class="mt-1 mb-0" />
+
+                            </div>
+                        </div>
+
+
+
+
+
+
+                        @foreach (var e in Model)
+                        {
+
+                            <div class="row ">
+                                <div class="col-lg-12 ">
+
+
+                                    <div class="col-6 col-lg-3   mt-1 mb-1">@e.EtkinlikAd</div>
+                                    <div class="col-6 col-lg-3   mt-1 mb-1">@e.EtkinlikAciklama</div>
+                                    <div class="col-6 col-lg-2   mt-1 mb-1">@e.IsHome</div>
+                                    <div class="col-6 col-lg-2   mt-1 mb-1">@e.Tarih.ToString($"{0:dd/MM/yyyy}")</div>
+                                    <div class="col-6 col-lg-2   mt-1 mb-1">
+                                        <img src="~/images/etkinlikler/@e.EtkinlikFotoLink"
+                                             class="img-fluid"
+                                             asp-append-version="true" />
+                                    </div>
+                                    <div class="col-6 col-lg-2   mt-1 mb-1" style="">
+                                        <a class="mr-2" asp-controller="Admin" asp-action="EditEtkinlik" asp-route-id="@e.EtkinlikId"><i class="fas fa-edit" style="color:cornflowerblue;"></i></a>
+                                        <a asp-action="DeleteEtkinlik" asp-route-id="@e.EtkinlikId">
+                                            <i class="fas fa-trash-alt" style="color:#d10404; "></i>
+                                        </a>
+                                    </div>
+
+                                    @*<div clas><a asp-controller="Admin" asp-action="EditEtkinlik" asp-route-id="@e.EtkinlikId" class="btn btn-primary">Güncelle</a></div>
+                                        <div>
+                                            <form method="post" asp-action="DeleteEtkinlik" asp-route-id="@e.EtkinlikId">
+                                                <button type="submit" class="btn btn-danger">Sil</button>
+                                            </form>
+                                        </div>*@
+
+
+
+
+
+                                </div>
+                                <div class="col-lg-12">
+                                    <hr class="mt-1 mb-0" />
+                                </div>
+                                <div class="col-lg-12">
+                                    <hr class="mt-1 mb-0" />
+                                </div>
+                            </div>
+
+
+                            @*<div class="">
+                                    <div class="text-center" colspan="4">
+                                        <h5>Henüz hiç kayıt yok.</h5>
+                                    </div>
+                                </div>*@
+
+
+
+                        }
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div>
+                    Henüz Kayıt Oluşturulmadı.
+                    <form asp-action="Etkinlikler" method="get">
+                        <div class="form-actions no-color">
+                            <p>
+                                Arama Yapın : <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                                <input type="submit" value="Search" class="btn btn-default" /> |
+                                <a asp-action="Etkinlikler">Full Liste</a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+
+
+            }
+
+
+        </div>
+    </div>
+
+</div>
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Etkinlikler"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Etkinlikler"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>

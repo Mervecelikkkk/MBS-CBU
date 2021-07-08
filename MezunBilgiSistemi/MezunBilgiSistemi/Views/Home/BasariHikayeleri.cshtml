@@ -1,0 +1,36 @@
+﻿@model MezunBilgiSistemi.Areas.Identity.Data.MBSUser
+@{
+    ViewData["Title"] = "Başarı Hikayeleri";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<div class="container-fluid">
+
+
+    <div class="wrapper row3">
+
+        <section id="team" class="hoc container clear">
+            <!-- ################################################################################################ -->
+            <div class="col-12 col-md-12">
+                <article>
+                    <figure>
+                        <a class="imgover" href="#"><img src="~/images/user/@Model.ProfilePicture" alt=""></a>
+                        <figcaption class="heading">@Model.FirsName  @Model.LastName</figcaption>
+                    </figure>
+                    <em>@Model.Job</em>
+                    <p>@Model.SuccesStory</p>
+                    <footer>
+                        <ul class="faico clear">
+                            <li><a class="faicon-facebook" href="#"><i class="fab fa-facebook"></i></a></li>
+                            <li><a class="faicon-google-plus" href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                            <li><a class="faicon-linkedin" href="#"><i class="fab fa-linkedin"></i></a></li>
+                            <li><a class="faicon-twitter" href="#"><i class="fab fa-twitter"></i></a></li>
+                            <li><a class="faicon-vk" href="#"><i class="fab fa-vk"></i></a></li>
+                        </ul>
+                    </footer>
+                </article>
+            </div>
+            <!-- ################################################################################################ -->
+        </section>
+    </div>
+</div>

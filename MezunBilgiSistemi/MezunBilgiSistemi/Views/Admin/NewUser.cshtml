@@ -1,0 +1,178 @@
+﻿@model MezunBilgiSistemi.ViewModels.NewUserViewModel
+@{
+    ViewData["Title"] = "NewUser";
+    Layout = "~/Views/Admin/_LayoutAdmin.cshtml";
+}
+@{
+    ViewBag.Title = "New User";
+}
+
+
+
+<h2>Yeni Kullanıcı Ekle</h2>
+<div class="card">
+    <div class="card-body">
+        <form method="post" asp-action="NewUser" enctype="multipart/form-data">
+            <div class="form-group row">
+                <div class="col-lg-12">
+                    <div class="col-lg-6">
+
+                        <label asp-for="FirsName" class=" col-form-label"></label>
+                        <div class="">
+                            <input asp-for="FirsName" class="form-control">
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6">
+                        <label asp-for="LastName" class=" col-form-label"></label>
+                        <div class="">
+                            <input asp-for="LastName" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-lg-12">
+                    <div class="col-lg-6">
+                        <label asp-for="Address" class="col-form-label"></label>
+                        <div class="">
+                            <input asp-for="Address" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <label asp-for="PhoneNumber" class="col-form-label"></label>
+                        <div class="">
+                            <input asp-for="PhoneNumber" class="form-control">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <div class="col-lg-12">
+                    <div class="col-lg-6">
+                        <label asp-for="Department" class="col-form-label"></label>
+                        <div class="">
+                            <input asp-for="Department" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <label asp-for="Business" class="col-form-label"></label>
+                        <div class="">
+                            <input asp-for="Business" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-lg-12">
+                    <div class="col-lg-6">
+                        <label asp-for="IdentificationNumber" class="col-form-label"></label>
+                        <div class="">
+                            <input asp-for="IdentificationNumber" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <label asp-for="Gender" class="col-form-label"></label>
+                        <div class="">
+                            <select asp-for="Gender" class="form-control">
+                                <option selected disabled>Cinsiyet seçiniz</option>
+                                <option value="Kadın">Kadın</option>
+                                <option value="Erkek">Erkek</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-lg-12">
+                    <div class="col-lg-6">
+                        <label asp-for="ProfileImage" class="col-control-label"></label>
+                        <div class="custom-file">
+                            <input asp-for="ProfileImage" class="custom-file-input" id="customFile">
+                            <label class="custom-file-label" for="customFile">Dosya Seçiniz</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <label asp-for="Email" class="col-form-label"></label>
+                        <div class="">
+                            <input asp-for="Email" class="form-control">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-12">
+                    <div class="col-lg-6">
+                        <label asp-for="Password" class="control-label"></label>
+                        <div>
+                            <input @*readonly="readonly"*@ id="passwordInput" asp-for="Password" class="form-control" />
+
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 right mt-2">
+                                <button class="btn btn-dark btn-sm" type="button" onclick="generatePassword()">Parola Türet</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 custom-control custom-checkbox  mt-4">
+                        <input asp-for="EmailConfirmed" type="checkbox" class="custom-control-input">
+                        <label asp-for="EmailConfirmed" class="custom-control-label ml-4"></label>
+                    </div>
+                    <div class="col-lg-3  custom-control custom-checkbox  mt-4">
+                        <input asp-for="Ishome" type="checkbox" class="custom-control-input">
+                        <label asp-for="Ishome" class="custom-control-label">Anasayfada Görün</label>
+                    </div>
+
+
+                </div>
+                    </div>
+
+                    
+                         
+                        
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-12 right">
+                            <button type="submit" class="btn btn-primary btn-sm">Kaydet</button>
+                            <a asp-action="Kullanıcılar" class="btn btn-primary btn-sm">İptal</a>
+                        </div>
+                    </div>
+
+
+        </form>
+    </div>
+</div>
+<script>
+    function generatePassword() {
+        event.preventDefault();
+        $.get(
+            "/Admin/GeneratePassword",
+            function (data) {
+                document.getElementById("passwordInput").value = data;
+            }
+        );
+    }
+</script>
+<script type="text/javascript">
+
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
+
+

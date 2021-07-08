@@ -1,0 +1,170 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using MezunBilgiSistemi.Areas.Identity.Data
+
+@inject SignInManager<MBSUser> SignInManager
+@inject UserManager<MBSUser> UserManager
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    @RenderSection("Styles", false)
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- BOOTSTRAP STYLES-- ADMİN CSS-->
+    <link href="~/css/bootstrap.css" rel="stylesheet" asp-append-version="true" />
+    <!-- FONTAWESOME STYLES-->
+    <link href="~/css/font-awesome.css" rel="stylesheet" asp-append-version="true" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+    <!--CUSTOM BASIC STYLES-->
+    <link href="~/css/basic.css" rel="stylesheet" asp-append-version="true" />
+    <!--CUSTOM MAIN STYLES-->
+    <link href="~/css/custom.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/layout.css" rel="stylesheet" asp-append-version="true" />
+    <!-- GOOGLE FONTS-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+
+</head>
+<body>
+
+
+    <!-- /. NAV TOP  -->
+    <div id="wrapper">
+
+
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        var girisYapanKullanici = await UserManager.GetUserAsync(User);
+                        <li>
+                            <a> <img src="~/images/user/@girisYapanKullanici.ProfilePicture" class="img-thumbnail img-circle " style="height:40px;width:40px" />  &nbsp; @girisYapanKullanici.FirsName @girisYapanKullanici.LastName</a>
+                        </li>
+                    }
+
+                    <li>
+                        <a asp-controller="Role" asp-action="RoleList"><i class="fa fa-people-carry "></i>Rol Listesi</a>
+
+                    </li>
+
+                    <li>
+                        <a asp-controller="Admin" asp-action="Kullanıcılar"><i class="fa fa-desktop "></i>Kullanıcılar </a>
+
+                    </li>
+                    <li>
+                        <a asp-controller="Admin" asp-action="Etkinlikler"><i class="fas fa-chart-line"></i>Etkinlikler </a>
+
+                    </li>
+                    <li>
+                        <a asp-controller="Admin" asp-action="Duyurular"><i class="fa fa-flash "></i>Duyurular </a>
+
+                    </li>
+                    <li>
+                        <a asp-controller="Admin" asp-action="Haberler"><i class="fa fa-newspaper "></i>Haberler </a>
+                    </li>
+
+                    <li>
+                        <a asp-controller="Home" asp-action="Index"><i class="fa fa-home "></i>Ana Sayfa</a>
+
+                    </li>
+                </ul>
+
+            </div>
+
+        </nav>
+
+
+
+        <div id="page-wrapper">
+            <div id="page-inner">
+                @RenderBody()
+            </div>
+        </div>
+
+        <div class="wrapper row4">
+            <footer id="footer" class="hoc clear">
+                <!-- ################################################################################################ -->
+                <div class="one_quarter first">
+                    <h6 class="heading">Bizi Takip Edin</h6>
+                    <ul class="faico clear">
+                        <li><a class="faicon-facebook" href="#"><i class="fab fa-facebook"></i></a></li>
+                        <li><a class="faicon-google-plus" href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                        <li><a class="faicon-linkedin" href="#"><i class="fab fa-linkedin"></i></a></li>
+                        <li><a class="faicon-twitter" href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a class="faicon-vk" href="#"><i class="fab fa-vk"></i></a></li>
+                    </ul>
+                </div>
+                <div class="one_quarter">
+                    <h6 class="heading">İletişim için</h6>
+                    <ul class="nospace linklist contact">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <address>
+                                Yağcılar, 45140 Yunusemre/Manisa
+                            </address>
+                        </li>
+                        <li><i class="fas fa-phone"></i> (236) 201 10 00 </li>
+                        <li><i class="fas fa-fax"></i>  (236) 237 24 42</li>
+                        <li><i class="far fa-envelope"></i> celalbayaruniversitesi@hs01.kep.tr</li>
+                    </ul>
+                </div>
+                <div class="one_quarter">
+                    <h6 class="heading">Manisa Celal Bayar Üniversitesi</h6>
+                    <ul class="nospace linklist">
+                        <li><a href="#">Yönetim</a></li>
+                        <li><a href="#">Akademik</a></li>
+                        <li><a href="#">Öğrenci</a></li>
+                        <li><a href="#">Araştırma</a></li>
+                        <li><a href="#">Bilişim Servisleri</a></li>
+                    </ul>
+                </div>
+                <div class="one_quarter">
+                    <h6 class="heading">Mezunlarla İletişim ve Kariyer</h6>
+                    <ul class="nospace linklist">
+                        <li><a href="#">Anasayfa</a></li>
+                        <li><a href="#">Hakkımızda</a></li>
+                        <li><a href="#">Etkinlikler</a></li>
+                        <li><a href="#">Duyurular</a></li>
+                        <li><a href="#">İletişim</a></li>
+
+                    </ul>
+                </div>
+                <!-- ################################################################################################ -->
+            </footer>
+        </div>
+    </div>
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <div class="wrapper row5">
+        <div id="copyright" class="hoc clear">
+            <!-- ################################################################################################ -->
+            <p class="fl_left">Copyright &copy; 2018 - All Rights Reserved - <a href="#">Domain Name</a></p>
+            <p class="fl_right">Template by <a target="_blank" href="https://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
+            <!-- ################################################################################################ -->
+        </div>
+    </div>
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
+
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME  ADMİN JS -->
+    <!-- JQUERY SCRIPTS -->
+    <script src="~/js/jquery-1.10.2.js" asp-append-version="true"></script>
+    <!-- BOOTSTRAP SCRIPTS -->
+    <script src="~/js/bootstrap.js" asp-append-version="true"></script>
+    <!-- METISMENU SCRIPTS -->
+    <script src="~/js/jquery.metisMenu.js" asp-append-version="true"></script>
+    <!-- CUSTOM SCRIPTS -->
+    <script src="~/js/custom.js" asp-append-version="true"></script>
+    <script src="~/js/img.js" asp-append-version="true"></script>
+
+    <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+</body>
+</html>

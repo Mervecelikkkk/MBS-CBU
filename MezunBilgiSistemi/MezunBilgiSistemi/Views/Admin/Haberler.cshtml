@@ -1,0 +1,147 @@
+﻿@model PaginatedList<MezunBilgiSistemi.Models.Haberler>
+@{
+    ViewData["Title"] = "Haberler";
+    Layout = "~/Views/Admin/_LayoutAdmin.cshtml";
+}
+
+<div class="content-col w-100 pb-5">
+
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-12 col-lg-10">
+
+
+                <div class="page-baslik">
+                    <h2 class="mb-3 mt-3">Haberler</h2>
+
+
+                </div>
+            </div>
+            <form asp-action="Haberler" method="get">
+                <div class="form-actions no-color">
+                    <p>
+                        Arama Yapın : <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                        <input type="submit" value="Search" class="btn btn-default" /> |
+                        <a asp-action="Haberler">Full Liste</a>
+                    </p>
+                </div>
+            </form>
+
+        </div>
+
+
+
+
+        <div class="row">
+            <div class="col-lg-12 ">
+                <a href="HaberEkle" class="btn btn-primary mb-3" style="padding: 2px 2px 2px 2px; width: auto">
+                    <i class="fas fa-plus-square " style="  padding:0px; height: 0.5rem;
+
+"> </i> Yeni Haber
+                </a>
+                <div class="card p-2">
+
+                    <div class="row card-title-row mb-2 sm-hide">
+
+
+                        <div class="col-6 col-lg-3   mt-1 mb-1">Haber Başlığı</div>
+                        <div class="col-6 col-lg-3   mt-1 mb-1">Haber Açıklama</div>
+                        <div class="col-6 col-lg-2   mt-1 mb-1">Anasayfa Durumu</div>
+                        <div class="col-6 col-lg-2   mt-1 mb-1"><a asp-action="Haberler" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Yüklenme Tarihi</a></div>
+                        <div class="col-6 col-lg-2   mt-1 mb-1">Haber Fotoğraf</div>
+
+                        <div class="col-6 col-lg-2   mt-1 mb-1"></div>
+
+                        <div class="col-lg-12">
+                            <hr class="mt-1 mb-0" />
+
+                        </div>
+                    </div>
+
+                    @if (Model.Any())
+                    {
+                        @foreach (var h in Model)
+                        {
+                            <div class="row">
+
+
+                                <div class="col-6 col-lg-3   mt-1 mb-1">@h.HaberAd</div>
+                                <div class="col-6 col-lg-3   mt-1 mb-1">@h.HaberAciklama</div>
+                                <div class="col-6 col-lg-2   mt-1 mb-1">@h.IsHome</div>
+                                <div class="col-6 col-lg-2   mt-1 mb-1">@h.Tarih.ToString($"{0:dd/MM/yyyy}")</div>
+                                <div class="col-6 col-lg-2   mt-1 mb-1">
+                                    <img src="~/images/duyurular/@h.HaberFotoLink"
+                                         class="img-fluid"
+                                         asp-append-version="true" />
+                                </div>
+
+                                <div class="col-6 col-lg-2   mt-1 mb-1" style="">
+                                    <a class="mr-2" asp-controller="Admin" asp-action="EditHaber" asp-route-id="@h.HaberID"><i class="fas fa-edit" style="color:cornflowerblue;"></i></a>
+                                    <a asp-action="DeleteHaber" asp-route-id="@h.HaberID">
+                                        <i class="fas fa-trash-alt" style="color:#d10404; "></i>
+                                    </a>
+                                </div>
+
+                                <div class="col-12 ">
+                                    <hr class="mt-1 mb-0" />
+                                </div>
+
+
+                            </div>
+                        }
+
+                    }
+
+                    else
+                    {
+                        <div>
+                            Henüz Kayıt Oluşturulmadı.
+                            <form asp-action="Haberler" method="get">
+                                <div class="form-actions no-color">
+                                    <p>
+                                        Arama Yapın : <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                                        <input type="submit" value="Search" class="btn btn-default" /> |
+                                        <a asp-action="Haberler">Full Liste</a>
+                                    </p>
+                                </div>
+                            </form>
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Haberler"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Haberler"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>
+
+
+
+
+
+
+
+
+

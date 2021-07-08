@@ -1,0 +1,127 @@
+﻿@model MezunBilgiSistemi.ViewModels.EditUserViewModel
+@{
+    ViewData["Title"] = "EditUser";
+    Layout = "~/Views/Admin/_LayoutAdmin.cshtml";
+}
+
+@{
+    ViewBag.Title = "Edit User";
+}
+
+<h1>Kullanıcı Güncelle</h1>
+
+<form method="post" class="mt-3">
+    <div class="form-group row">
+        <label asp-for="Id" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Id" disabled class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Email" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Email" class="form-control">
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="UserName" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="UserName" class="form-control">
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="FirstName" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="FirstName" class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="LastName" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="LastName" class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Adres" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Adres" class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Meslek" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Meslek" class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="İşyeri" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="İşyeri" class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Bölüm" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Bölüm" class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Telefon" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Telefon" class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Cinsiyet" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <select asp-for="Cinsiyet" class="form-control">
+                <option selected disabled>Cinsiyet seçiniz</option>
+                <option value="Kadın">Kadın</option>
+                <option value="Erkek">Erkek</option>
+            </select>
+        </div>
+    </div>
+    <div class="custom-control custom-checkbox">
+        <input asp-for="EmailConfirmed" type="checkbox" class="custom-control-input">
+        <label asp-for="EmailConfirmed" class="custom-control-label"></label>
+    </div>
+    <div class="custom-control custom-checkbox">
+        <input asp-for="Ishome" type="checkbox" class="custom-control-input">
+        <label asp-for="Ishome" class="custom-control-label">Anasayfada Görün</label>
+    </div>
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+            <a asp-action="Kullanıcılar" class="btn btn-primary">İptal</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h3>Kullanıcı Rolleri</h3>
+        </div>
+        <div class="card-body">
+            @if (Model.Roles.Any())
+            {
+                foreach (var role in Model.Roles)
+                {
+                    <h5 class="card-title">@role</h5>
+                }
+            }
+            else
+            {
+                <h5 class="card-title">Role Sahip Değil</h5>
+            }
+        </div>
+        <div class="card-footer">
+            <a asp-action="ManageUserRoles" asp-route-userId="@Model.Id" class="btn btn-primary">
+                Rolleri Yönet
+            </a>
+        </div>
+    </div>
+</form>
+

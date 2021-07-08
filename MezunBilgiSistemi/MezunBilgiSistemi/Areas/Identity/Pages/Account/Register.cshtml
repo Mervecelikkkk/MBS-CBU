@@ -1,0 +1,133 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/_LayoutAccount.cshtml";
+    var roles = (List<IdentityRole>)ViewData["roles"];
+}
+
+
+<div class="container register">
+    <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <div class="row">
+            <div class="col-md-3 register-left">
+                <img src="https://upload.wikimedia.org/wikipedia/tr/f/f3/Celal_bayar_%C3%BCniversitesi_yeni_logosu.png" alt="" />
+                <h3>Hoşgeldiniz</h3>
+                <p>Giriş Yapabilmek İçin Lütfen Kayıt Olunuz!</p>
+                <input type="submit" asp-area="Identity" asp-page="/Account/Login" name="" value="Giriş Yap" /><br />
+            </div>
+            <div class="col-md-9 register-right">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <h3 class="register-heading">Kayıt Ol</h3>                       
+                        <div class="row register-form">
+                            <div class="col-md-6">
+                                <div asp-validation-summary="All" class="text-danger"></div>
+                                <div class="form-group">
+                                    <input asp-for="Input.FirsName" class="form-control" placeholder="Ad* " />
+                                    <span asp-validation-for="Input.FirsName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input asp-for="Input.LastName" class="form-control" placeholder="Soyad*" />
+                                    <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" asp-for="Input.Password" class="form-control" placeholder="Parola*" />
+                                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" asp-for="Input.ConfirmPassword" class="form-control" placeholder="Parolayı Onayla*" />
+                                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                                </div>
+                                <div>
+                                    <select asp-for="Input.RoleName" class="form-control" asp-items='new SelectList(roles,"Id","Name")'>
+                                        <option disabled selected>Rol seçiniz</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="email" asp-for="Input.Email" class="form-control" placeholder="E-posta*" />
+                                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" minlength="10" maxlength="10" asp-for="Input.PhoneNumber" class="form-control" placeholder="Telefon Numarası* " />
+                                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="date" asp-for="Input.DateOfBirth" class="form-control" placeholder="Doğum Tarihi*" />
+                                    <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" minlength="11" maxlength="11" asp-for="Input.IdentificationNumber" class="form-control" placeholder="TC Kimlik No*" />
+                                    <span asp-validation-for="Input.IdentificationNumber" class="text-danger"></span>
+                                </div>
+                                <input type="submit" class="btnRegister" value="Kayıt Ol" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@*<div class="row">
+        <div class="col-md-4">
+            <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <h4>Create a new account.</h4>
+                <hr />
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Input.Email"></label>
+                    <input asp-for="Input.Email" class="form-control" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Password"></label>
+                    <input asp-for="Input.Password" class="form-control" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.ConfirmPassword"></label>
+                    <input asp-for="Input.ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-default">Register</button>
+            </form>
+        </div>
+        <div class="col-md-6 col-md-offset-2">
+            <section>
+                <h4>Use another service to register.</h4>
+                <hr />
+                @{
+                    if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                    {
+                        <div>
+                            <p>
+                                There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                                for details on setting up this ASP.NET application to support logging in via external services.
+                            </p>
+                        </div>
+                    }
+                    else
+                    {
+                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                            <div>
+                                <p>
+                                    @foreach (var provider in Model.ExternalLogins)
+                                    {
+                                        <button type="submit" class="btn btn-default" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                    }
+                                </p>
+                            </div>
+                        </form>
+                    }
+                }
+            </section>
+        </div>
+    </div>
+
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }*@

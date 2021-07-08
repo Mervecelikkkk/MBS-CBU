@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+@{
+    ViewData["Title"] = "RoleList";
+    Layout = "~/Views/Admin/_LayoutAdmin.cshtml";
+}
+
+<h2>Rol Listesi</h2>
+
+@if (Model.Any())
+{
+    <a asp-controller="Role" asp-action="Create" class="btn btn-primary mb-3" style="padding: 2px 2px 2px 2px; width: auto">
+        <i class="fas fa-plus-square " style="  padding:0px; height: 0.5rem;
+
+"> </i> Yeni Rol
+    </a>
+    <br />
+  
+    <table class="table table-striped table-bordered">
+        <tr>
+
+            <th style="color:black">Rol Adı</th>
+            <th style="color:black"></th>
+            <th style="color:black"></th>
+
+
+        </tr>
+        @foreach (var role in Model)
+        {
+            <tr>
+
+                <td>@role.Name</td>
+
+                <td><a class="btn btn-primary" asp-action="RoleEdit" asp-route-id="@role.Id"><i class="fas fa-edit"></i></a></td>
+                <td>
+                    <form method="post" asp-action="DeleteRole" asp-route-id="@role.Id">
+                        <button type="submit" class="btn btn-danger"> <i class="fas fa-trash-alt" style=""></i></button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+
+}
+else
+{
+    <table class="table table-striped table-bordered">
+        <tr>
+
+            <th style="color:black">Rol Adı</th>
+        </tr>
+        <tr>
+            <th>Henüz Rol Oluşturulmadı!</th>
+            <th><a asp-action="Create" asp-controller="Role" class="btn btn-primary">Yeni Rol</a></th>
+        </tr>
+    </table>
+}

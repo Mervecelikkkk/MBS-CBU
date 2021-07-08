@@ -1,0 +1,110 @@
+﻿@model IEnumerable<MezunBilgiSistemi.Models.Duyurular>
+@{
+    ViewData["Title"] = "Duyurular";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="wrapper row3">
+        <section id="services" class="hoc container clear">
+            <!-- ################################################################################################ -->
+            <div class="center btmspace-80" style="margin-top:-50px;">
+                <h6 class="heading underline font-x2">Duyurular</h6>
+            </div>
+            <ul class="nospace group">
+                @if (Model.Any())
+                {
+                    @foreach (var d in Model)
+                    {
+                        <li class="one_third">
+                            <article>
+                                <a asp-controller="Home" asp-action="DuyuruDetay"><i class="fas fa-bullhorn"></i></a>
+                                <h6 class="heading">@d.Tarih.ToString($"{0:dd/MM/yyyy}")</h6>
+                                <p>@d.DuyuruAd</p>
+                                <footer><a asp-controller="Home" asp-action="DuyuruDetay"><i class="fas fa-arrow-right"></i></a></footer>
+                            </article>
+                        </li>
+
+                    }
+                }
+                else
+                {
+                    <li class="one_third">
+                        <article>
+                            <a href="#"><i class="fab fa-fort-awesome"></i></a>
+                            <h6 class="heading">Duyuru Yayınlanmadı</h6>
+                            <p>..........</p>
+                            <footer><a href="#"><i class="fas fa-arrow-right"></i></a></footer>
+                        </article>
+                    </li>
+                }
+                @*<li class="one_third">
+            <article>
+                <a href="#"><i class="fab fa-deviantart"></i></a>
+                <h6 class="heading">17.03.2021</h6>
+                <p>MCBÜ Tıp Fakültesi Sağlık Çalışanlarının Yürüttüğü "SARS CoV-2 İnaktif Aşısının Bağışıklık Yanıtı" Araştırması Sonuçlandı</p>
+                <footer><a href="#"><i class="fas fa-arrow-right"></i></a></footer>
+            </article>
+        </li>
+        <li class="one_third">
+            <article>
+                <a href="#"><i class="fab fa-sticker-mule"></i></a>
+                <h6 class="heading">24.04.2021</h6>
+                <p>Sözde Ermeni Soykırım İddiası Kararı ile İlgili Kamuoyuna Duyuru</p>
+                <footer><a href="#"><i class="fas fa-arrow-right"></i></a></footer>
+            </article>
+        </li>
+        <li class="one_third">
+            <article>
+                <a href="#"><i class="fas fa-user-secret"></i></a>
+                <h6 class="heading">23.04.2021</h6>
+                <p>Rektör Ataç 23 Nisan Ulusal Egemenlik ve Çocuk Bayramı’nın 101. Yılında Manisa Valiliği Tarafından Düzenlenen Törene Katıldı.</p>
+                <footer><a href="#"><i class="fas fa-arrow-right"></i></a></footer>
+            </article>
+        </li>
+        <li class="one_third">
+            <article>
+                <a href="#"><i class="fas fa-quidditch"></i></a>
+                <h6 class="heading">21.04.2021</h6>
+                <p>MCBÜ Hafsa Sultan Hastanesi’nde PostCovid Polikliniği Hizmete Başladı</p>
+                <footer><a href="#"><i class="fas fa-arrow-right"></i></a></footer>
+            </article>
+        </li>
+        <li class="one_third">
+            <article>
+                <a href="#"><i class="fas fa-wheelchair"></i></a>
+                <h6 class="heading">12.04.2021</h6>
+                <p>Erasmus+ Personel Hareketliliği Ek İlan Başvuruları Başlamıştır.</p>
+                <footer><a href="#"><i class="fas fa-arrow-right"></i></a></footer>
+            </article>
+        </li>
+        <li class="one_third">
+            <article>
+                <a href="#"><i class="fas fa-wheelchair"></i></a>
+                <h6 class="heading">12.04.2021</h6>
+                <p>Erasmus+ Personel Hareketliliği Ek İlan Başvuruları Başlamıştır.</p>
+                <footer><a href="#"><i class="fas fa-arrow-right"></i></a></footer>
+            </article>
+        </li>
+        <li class="one_third">
+            <article>
+                <a href="#"><i class="fas fa-wheelchair"></i></a>
+                <h6 class="heading">12.04.2021</h6>
+                <p>Erasmus+ Personel Hareketliliği Ek İlan Başvuruları Başlamıştır.</p>
+                <footer><a href="#"><i class="fas fa-arrow-right"></i></a></footer>
+            </article>
+        </li>
+        <li class="one_third">
+            <article>
+                <a href="#"><i class="fas fa-wheelchair"></i></a>
+                <h6 class="heading">12.04.2021</h6>
+                <p>Erasmus+ Personel Hareketliliği Ek İlan Başvuruları Başlamıştır.</p>
+                <footer><a href="#"><i class="fas fa-arrow-right"></i></a></footer>
+            </article>
+        </li>*@              
+            </ul>
+            <!-- ################################################################################################ -->
+        </section>
+    </div>
+</div>
+

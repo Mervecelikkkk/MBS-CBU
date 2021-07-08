@@ -1,0 +1,76 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using MezunBilgiSistemi.Areas.Identity.Data
+
+@inject SignInManager<MBSUser> SignInManager
+@inject UserManager<MBSUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    var girisYapanKullanici = await UserManager.GetUserAsync(User);
+
+    <script src="https://kit.fontawesome.com/b99e675b6e.js">
+
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    @*<link asp-append-version="true" rel="stylesheet" type="text/css" href="~/css/loginPartial.css" />*@
+    @*<script src="~/js/loginPartial.js" type="text/javascript" asp-append-version="true"></script>*@
+
+
+
+    
+            <ul class="nav nav navbar-right clear" style="margin-top:-80px; margin-bottom:0px;" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })" method="post" id="logoutForm">
+
+                <li class="nav-item">
+                    <a class="nav-link text-dark" style="padding:20px 0;" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+
+                        <b>
+                            <img src="~/images/user/@girisYapanKullanici.ProfilePicture" class="rounded-circle" style="height:40px;width:40px"
+                                    asp-append-version="true" />
+                            @girisYapanKullanici.FirsName @girisYapanKullanici.LastName
+                            @if (girisYapanKullanici.ProfilePicture == null)
+                            {
+
+                            }
+                            else
+                            {
+
+                            }
+                        </b>
+                    </a>
+                    <ul>
+
+                        <li><a asp-area="Identity" asp-page="/Account/Manage/Index"><i class="fas fa-user-circle"></i> Profil</a></li>
+                        <li><a asp-area="Identity" asp-page="/Account/Manage/Email"><i class="fas fa-envelope"></i> E-posta</a></li>
+                        <li>
+                            <a  asp-area="Identity" asp-page="/Account/Manage/ChangePassword"><i class="fas fa-lock"></i> Parola</a>
+
+                        </li>
+                        <li><a asp-area="Identity" asp-page="/Account/Manage/TwoFactorAuthentication"><i class="fas fa-key"></i> İki Faktörlü Kimlik Doğrulama</a></li>
+                        <li><a asp-area="Identity" asp-page="/Account/Manage/PersonalData"><i class="fas fa-user-minus"></i> Hesabı Sil</a></li>
+
+                    </ul>
+
+
+
+
+
+
+
+
+                </li>
+                <li class="nav-item" style="margin-top:30px;">
+                    <div type="submit" class=""><i style="font-size:20px;  color:#82B7DF;" class="fas fa-sign-out-alt"></i></div>
+                </li>
+
+            </ul>
+          
+
+
+}
+else
+{
+    <ul class="nav nav navbar-right clear" style="margin-top:-80px; margin-bottom:0px; ">
+        <li class="nav-item"><a style="text-decoration:none;" asp-area="Identity" asp-page="/Account/Register">Kayıt Ol</a></li>
+        <li class="nav-item"><a style="text-decoration:none;" asp-area="Identity" asp-page="/Account/Login">Giriş Yap</a></li>
+    </ul>
+}

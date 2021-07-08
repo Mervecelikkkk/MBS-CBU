@@ -1,0 +1,76 @@
+﻿@model MezunBilgiSistemi.ViewModels.HaberViewModel
+@{
+    ViewData["Title"] = "HaberEkle";
+    Layout = "~/Views/Admin/_LayoutAdmin.cshtml";
+}
+
+<h2>Haber Ekle</h2>
+<div class="card">
+    <div class="card-body">
+
+        <form method="post" asp-action="HaberEkle" enctype="multipart/form-data" class="mt-3">
+            <div class="form-group row">
+                <div class="col-lg-12">
+                    <div class="col-lg-6">
+                        <label class="col-form-label">Haber Başlık</label>
+                        <div class="">
+                            <input asp-for="HaberAd" class="form-control">
+                            <span asp-validation-for="HaberAd" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <label class="col-form-label">Fotoğraf Seçiniz</label>
+                        <div class=" custom-file">
+                            <input asp-for="HaberImage" class="custom-file-input col-sm-10" id="customFile">
+                            <label class="custom-file-label" for="customFile">Dosya Seçiniz</label>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-lg-12">
+                    <div class="col-lg-6">
+                        <label class=" col-form-label">Haber Açıklaması</label>
+                        <div class="">
+                            <textarea asp-for="HaberAciklama" class="form-control"></textarea>
+                            <span asp-validation-for="HaberAciklama" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 custom-control custom-checkbox">
+                        <input asp-for="Ishome" type="checkbox" class="custom-control-input">
+                        <label asp-for="Ishome" class="custom-control-label mt-5 ml-4" for="customFile">Anasayfada Görün</label>
+                    </div>
+
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-12 right">
+                    <button type="submit" class="btn btn-primary btn-sm">Kaydet</button>
+                    <a asp-action="Haberler" class="btn btn-secondary btn-sm">İptal</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
+

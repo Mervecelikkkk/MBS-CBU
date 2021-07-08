@@ -1,0 +1,43 @@
+﻿@model MezunBilgiSistemi.Models.Haberler
+@{
+    ViewData["Title"] = "EditHaber";
+    Layout = "~/Views/Admin/_LayoutAdmin.cshtml";
+}
+
+<h2>Haberi Güncelle</h2>
+
+<form method="post" class="mt-3">
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Haber Başlığı</label>
+        <div class="col-sm-10">
+            <input asp-for="HaberAd" class="form-control">
+            <span asp-validation-for="HaberAd" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Haber Açıklaması</label>
+        <div class="col-sm-10">
+            <textarea asp-for="HaberAciklama" class="form-control"></textarea>
+            <span asp-validation-for="HaberAciklama" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Fotoğraf Seçiniz</label>
+        <div class="col-sm-10">
+            @*<input hidden asp-for="EtkinlikFotoLink">
+                <img src="~/img/Etkinlikler/@Model.EtkinlikFotoLink" width="80" height="80" />
+                <input type="file" name="file">*@
+        </div>
+    </div>
+    <div class="custom-control custom-checkbox">
+        <input asp-for="IsHome" type="checkbox" class="custom-control-input">
+        <label asp-for="IsHome" class="custom-control-label">Anasayfada Görün</label>
+    </div>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+            <a asp-action="Haberler" class="btn btn-primary">İptal</a>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,221 @@
+﻿<!DOCTYPE html>
+@using Microsoft.AspNetCore.Identity
+@using MezunBilgiSistemi.Areas.Identity.Data
+
+@inject SignInManager<MBSUser> SignInManager
+@inject UserManager<MBSUser> UserManager
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MezunBilgiSistemi</title>
+    @RenderSection("Styles", false)
+    <link rel="stylesheet" asp-append-version="true" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/bootstrap.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="~/css/layout.css" asp-append-version="true">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" rel="stylesheet" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous">
+
+    <!-- Font awesome -->
+    <link href="~/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    @*<link href="~/css/bootstrap.css" rel="stylesheet">*@
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+    <!-- Google Font -->
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&display=swap" rel="stylesheet">
+
+
+
+</head>
+<body>
+    <div class="wrapper row0">
+        <header id="header" class="hoc clear">
+            <!-- ################################################################################################ -->
+            <div id="logo" class="one_quarter first">
+                <img class="" src="~/img/logo.svg" />
+                @*<h1 class="logoname clear"><a href="index.html"><i class="fas fa-handshake"></i> </a></h1> *@
+                @*<div style="margin-top:5px; color:dimgrey; font-weight:500; "  ><span>Mezun Bilgi Sistemi</span></div>*@
+
+            </div>
+
+            <div class="three_quarter">
+                <ul class="nospace clear">
+                    @*<li class="one_third first">
+                    <div class="block clear"><a href="#"><i class="fas fa-phone"></i></a> <span><strong>Give us a call:</strong> +00 (123) 456 7890</span></div>
+                </li>
+                <li class="one_third">
+                    <div class="block clear"><a href="#"><i class="fas fa-envelope"></i></a> <span><strong>Send us a mail:</strong> support@domain.com</span></div>
+                </li>
+                <li class="one_third">
+                    <div class="block clear"><a href="#"><i class="fas fa-clock"></i></a> <span><strong> Mon. - Sat.:</strong> 08.00am - 18.00pm</span></div>
+                </li>*@
+                </ul>
+            </div>
+            <!-- ################################################################################################ -->
+        </header>
+    </div>
+    <div class="wrapper row1">
+        <div class="hoc clear">
+            <!-- ################################################################################################ -->
+            <nav id="mainav">
+                <ul class="clear">
+                    <li class="active"><a asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Hakkımızda">Hakkımızda</a></li>
+                    <li>
+                        <a class="" asp-controller="Home" asp-action="Etkinlikler">@*<i class="fas fa-caret-down">*@</i>Etkinlikler</a>
+                        @*<ul>
+                <li><a href="pages/gallery.html">Gallery</a></li>
+                <li><a href="pages/full-width.html">Full Width</a></li>
+                <li><a href="pages/sidebar-left.html">Sidebar Left</a></li>
+                <li><a href="pages/sidebar-right.html">Sidebar Right</a></li>
+                <li><a href="pages/basic-grid.html">Basic Grid</a></li>
+                <li><a href="pages/font-icons.html">Font Icons</a></li>
+            </ul>*@
+                    </li>
+                    <li>
+                        <a class="" asp-controller="Home" asp-action="Duyurular">@*<i class="fas fa-caret-down"></i>*@Duyurular</a>
+                        @*<ul>
+                <li><a href="#">Level 2</a></li>
+                <li>
+                    <a class="drop" href="#">Level 2 + Drop</a>
+                    <ul>
+                        <li><a href="#">Level 3</a></li>
+                        <li><a href="#">Level 3</a></li>
+                        <li><a href="#">Level 3</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">iş-Staj Olanakları</a></li>
+            </ul>*@
+                    </li>
+                    <li><a asp-controller="Home" asp-action="isveStajOlanak">iş-Staj Olanakları</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Iletisim">İletişim</a></li>
+                    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        <li><a asp-controller="Admin" asp-action="Kullanıcılar">Admin Panel</a></li>
+                    }
+
+
+
+                    @*<li><a asp-controller="Account" asp-action="Register" style="border-bottom: 1px solid; border-radius:30px; margin-left:280px;">&nbsp;&nbsp;Üye Ol&nbsp;&nbsp;</a></li>
+        <li><a asp-controller="Account" asp-action="Login" style="border-bottom: 1px solid; border-radius:30px;">Giriş Yap</a></li>*@
+                    <li>
+
+                    </li>
+                </ul>
+              
+                    <partial name="_LoginPartial.cshtml" />
+               
+            </nav>
+          
+            <!-- ################################################################################################ -->
+        </div>
+    </div>
+    <div class="">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <div class="wrapper row4">
+        <footer id="footer" class="hoc clear">
+            <!-- ################################################################################################ -->
+            <div class="one_quarter first">
+                <h6 class="heading">Bizi Takip Edin</h6>
+                <ul class="faico clear">
+                    <li><a class="faicon-facebook" href="https://www.facebook.com/bayaredutr/"><i class="fab fa-facebook"></i></a></li>
+                    <li><a class="faicon-linkedin" href="https://www.linkedin.com/school/celal-bayar-university/"><i class="fab fa-linkedin"></i></a></li>
+                    <li><a class="faicon-twitter" href="https://twitter.com/bayaredutr/"><i class="fab fa-twitter"></i></a></li>
+                    <li><a class="faicon-vk" href="https://www.youtube.com/channel/UCfflO6wLkLehLZyI3680pPQ/"><i class="fab fa-youtube"></i></a></li>
+                </ul>
+            </div>
+            <div class="one_quarter">
+                <h6 class="heading">İletişim için</h6>
+                <ul class="nospace linklist contact">
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <address>
+                            Yağcılar, 45140 Yunusemre/Manisa
+                        </address>
+                    </li>
+                    <li><i class="fas fa-phone"></i> (236) 201 10 00 </li>
+                    <li><i class="fas fa-fax"></i>  (236) 237 24 42</li>
+                    <li><i class="far fa-envelope"></i> celalbayaruniversitesi@hs01.kep.tr</li>
+                </ul>
+            </div>
+            <div class="one_quarter">
+                <h6 class="heading">Manisa Celal Bayar Üniversitesi</h6>
+                <ul class="nospace linklist">
+                    <li><a href="https://www.mcbu.edu.tr/">Yönetim</a></li>
+                    <li><a href="https://www.mcbu.edu.tr/">Akademik</a></li>
+                    <li><a href="https://www.mcbu.edu.tr/">Öğrenci</a></li>
+                    <li><a href="https://www.mcbu.edu.tr/">Araştırma</a></li>
+                    <li><a href="https://www.mcbu.edu.tr/">Bilişim Servisleri</a></li>
+                </ul>
+            </div>
+            <div class="one_quarter">
+                <h6 class="heading">Mezunlarla İletişim ve Kariyer</h6>
+                <ul class="nospace linklist">
+                    <li><a asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Hakkımızda">Hakkımızda</a></li>
+                    <li><a href="#">Etkinlikler</a></li>
+                    <li><a href="#">Duyurular</a></li>
+                    <li><a href="#">İletişim</a></li>
+
+                </ul>
+            </div>
+
+            <!-- ################################################################################################ -->
+        </footer>
+    </div>
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <div class="wrapper row5">
+        <div id="copyright" class="hoc clear">
+            <!-- ################################################################################################ -->
+            <p class="fl_left">Copyright &copy; 2018 - All Rights Reserved - <a href="#">Domain Name</a></p>
+            <p class="fl_right">Template by <a target="_blank" href="https://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
+            <!-- ################################################################################################ -->
+        </div>
+    </div>
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+    <!-- Main style sheet -->
+
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
+    @*<script src="~/js/site.js" asp-append-version="true"></script>*@
+
+
+    <!-- JAVASCRIPTS -->
+    <script src="~/js/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/js/jquery.backtotop.js" asp-append-version="true"></script>
+    <script src="~/js/jquery.mobilemenu.js" asp-append-version="true"></script>
+
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
